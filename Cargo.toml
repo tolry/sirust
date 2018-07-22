@@ -1,0 +1,10 @@
+[package]
+name = "sirust"
+version = "0.1.0"
+authors = ["Tobias Olry <tobias@tideways-gmbh.com>"]
+
+[lib]
+name = "lib"
+path = "src/lib.rs"
+
+[dependencies]

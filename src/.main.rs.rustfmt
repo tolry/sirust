@@ -1,0 +1,56 @@
+use std::env;
+use std::ops::{Add, Sub, Mul};
+
+fn main() {
+    let args: Vec<String> = env::args().collect();
+
+    //let mut game: Game = Game { round_number: 0, dices: vec![] };
+    let test: Input = Input {
+        compound_unit: vec![Unit {unit: StandardUnit::Kilogram, exponent: 1}],
+        amount: -3.2
+    };
+
+    let testAdd: Input = Input {
+        compound_unit: vec![Unit {unit: StandardUnit::Kilogram, exponent: 1}],
+        amount: 6.2
+    };
+
+    let sum = test + testAdd;
+
+    println!("{:?}", sum);
+}
+
+#[derive(Debug, PartialEq)]
+enum StandardUnit {
+    Ampere,
+    Meter,
+    Kilogram,
+    Second,
+    Kelvin,
+    Candela,
+    Mole,
+}
+
+#[derive(Debug)]
+struct Input {
+    compound_unit: Vec<Unit>,
+    amount: f64,
+}
+
+impl Add for Input {
+    type Output = Result<Input, String>;
+
+    fn add(self, other: Input) -> Result<Input, String> {
+        match self.compound_unit {
+            other.compound_unit => Err(format!("you fool"))
+            _ => Ok(Input {compound_unit: self.compound_unit, amount: self.amount + other.amount})
+        }
+    }
+}
+
+#[derive(Debug, PartialEq)]
+struct Unit {
+unit: StandardUnit,
+    exponent: i16
+}
+
